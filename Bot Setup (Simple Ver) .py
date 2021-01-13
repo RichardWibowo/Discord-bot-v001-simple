@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, tasks
 from pathlib import Path
 
-
+from random import choice
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -11,7 +11,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-global auth = 0
 client = commands.Bot(command_prefix ='.')
 status = ['jammin' , 'eating' , 'sleeping']
 ID = ""
@@ -31,10 +30,6 @@ async def on_member_join(member):
         if str(channel) == "general": # We check to make sure we are sending the message in the general channel
             await channel.send_message(f"""Welcome to the server {member.mention}""")
 
-@client.event #not tested
-async def on_member_join(member):
-    Role = discord.utilis.get(member.server.roles , name = 'FRIENDS')
-    await client.add_roles(member,role)
 
 @client.event #working
 async def on_ready() :
@@ -58,7 +53,7 @@ async def die(ctx):
     await ctx.send(choice(responses))
 
 #=================================================ILEARN SEC===========================================================================
-@client.command(name = 'login name', help = 'to store oneID and Password if u are Richard, the creator') #working
+@client.command(name = 'login', help = 'to store oneID and Password if u are Richard, the creator') #working
 @commands.has_role("Richard Wibowo")
 async def login(ctx):
     global ID 
@@ -69,19 +64,19 @@ async def login(ctx):
     print(ID) 
     print(Pass)
 
-@client.command(name = 'check oneID', help = 'send oneID i inputed') #not working
+@client.command(name = 'check', help = 'send oneID i inputed') #not working
 async def check(ctx):
     await ctx.send(ID)
     print(Pass)
     await ctx.send("check terminal for pass <3 ")
 
-@client.command(name = 'open ilearn' , help = 'to open ilearn fast') #working
+@client.command(name = 'open' , help = 'to open ilearn fast') #working
 async def open(ctx): 
      
      #open ilearn
     await ctx.send('Please study now')
 
-    Webdriver = "D:\Key Log\Discord-bot\chromedriver.exe"
+    Webdriver = "D:\Discord-bot-v001-simple\chromedriver.exe"
     driver = webdriver.Chrome(Webdriver)
     driver.get("https://ilearn.mq.edu.au/login/index.php")
 
